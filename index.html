@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Moodify - Vibe Playlist Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-900 min-h-screen p-6">
+<div class="max-w-4xl mx-auto">
+    <h1 class="text-3xl font-bold mb-6 text-center">Moodify 🎧</h1>
+    <p class="text-lg text-center mb-8">Pick a mood, get a vibe-matched playlist!</p>
+
+    <div class="flex justify-center mb-8">
+        <select id="vibeSelect" class="px-4 py-2 rounded-lg border border-gray-300">
+            <option value="chill">Chill</option>
+            <option value="hype">Hype</option>
+            <option value="sad">Sad</option>
+            <option value="study">Study</option>
+        </select>
+        <button onclick="generatePlaylist()" class="ml-4 px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600">
+            Generate
+        </button>
+    </div>
+
+    <div id="playlist" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6"></div>
+</div>
+
+<script>
+    async function generatePlaylist() {
+        const vibe = document.getElementById('vibeSelect').value;
+        const playlistContainer = document.getElementById('playlist');
+        playlistContainer.innerHTML = '<p class="text-center w-full">Loading...</p>';
+
+        // Simulated song data until Spotify API is connected
+        const dummySongs = [
+            { title: "Chill Waves", artist: "Lo-fi Boi", img: "https://via.placeholder.com/300", url: "https://spotify.com" },
+            { title: "Hype Beat", artist: "Energy G", img: "https://via.placeholder.com/300", url: "https://spotify.com" },
+            { title: "Sad Piano", artist: "Moody J", img: "https://via.placeholder.com/300", url: "https://spotify.com" }
+        ];
+
+        playlistContainer.innerHTML = dummySongs.map(song => `
+          <div class="bg-white p-4 rounded-xl shadow-lg text-center">
+            <img src="${song.img}" class="rounded-xl w-full h-48 object-cover mb-3" />
+            <h2 class="text-lg font-semibold">${song.title}</h2>
+            <p class="text-gray-500">${song.artist}</p>
+            <a href="${song.url}" target="_blank" class="mt-3 inline-block px-4 py-2 bg-green-500 text-white rounded-xl hover:bg-green-600">
+              Listen on Spotify
+            </a>
+          </div>
+        `).join('');
+    }
+</script>
+</body>
+</html>
